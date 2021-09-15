@@ -1,9 +1,10 @@
 import React from 'react';
+import { register } from '../../../api/register';
 
 import styles from './RegisterForm.module.css'
 
 // Regexp to validate email address
-const Regex = RegExp(/^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i);
+const Regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
 
 interface SignUpProps {
     name?: any;
@@ -28,12 +29,12 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
     constructor(props: SignUpProps) {
         super(props);
         const initialState = {
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: '',
             password: '',
+            email: '',
             password_confirmation: '',
+            first_name: '',
+            last_name: '',
+            username: '',
                 errors: {
                     username: '',
                     email: '',
@@ -51,24 +52,35 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
         let errors = this.state.errors;
         switch (name) {
             case 'username':
-                errors.username = value.length < 4 ? 'El nombre de usuario debe tener al menos 4 caracteres!': '';
+                errors.username = value.length < 4 ? '❗️El nombre de usuario debe tener al menos 4 caracteres!': '';
                 break;
             case 'email':
-                errors.email = Regex.test(value) ? '' : 'El email no es válido';
+                errors.email = Regex.test(value) ? '' : '❗️El email no es válido';
                 break;
             case 'password':
-                errors.password = value.length < 8 ? 'La contraseña deber tener al menos 8 cracteres!': '';
+                errors.password = value.length < 8 ? '❗️La contraseña deber tener al menos 8 cracteres!': '';
                 break;
             case 'password_confirmation':
-                errors.password_confirmation = value !== this.state.password ? 'Las contraseñas no coinciden': '';
+                errors.password_confirmation = value !== this.state.password ? '❗️Las contraseñas no coinciden': '';
             default:
                 break;
         }
         this.setState(Object.assign(this.state, { errors,[name]: value }));
-        console.log(this.state.errors);
 }
 
-    handleSubmit = (event : any) => {}
+    handleSubmit = (event : any) => {
+        event.preventDefault();
+        let validity = true;
+        Object.values(this.state.errors).forEach(val => {
+            val.length > 0 && (validity = false)
+        });
+        if (validity == true) {
+            const userData = {...this.state}
+            delete userData.errors
+            console.log('userData: ', userData)
+            register(userData)
+        }
+    }
 
     render() {
         const { errors }  = this.state
@@ -78,12 +90,12 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
                 <h2>Sign Up</h2>
                 <form onSubmit={this.handleSubmit} noValidate >
                   <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="firstName">First Name</label>
-                    <input className={styles.input} type='text' name='firstName' onChange={this.handleChange}/>
+                    <label className={styles.label} htmlFor="first_name">First Name</label>
+                    <input className={styles.input} type='text' name='first_name' onChange={this.handleChange}/>
                   </div>
                   <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="lastName">Last Name</label>
-                    <input className={styles.input} type='text' name='lastName' onChange={this.handleChange}/>
+                    <label className={styles.label} htmlFor="last_name">Last Name</label>
+                    <input className={styles.input} type='text' name='last_name' onChange={this.handleChange}/>
                   </div>
                   <div className={styles.inputField}>
                     <label className={styles.label} htmlFor="username">Username</label>

@@ -33,3 +33,5 @@ export const configureClient = ({ token }) => {
 export const resetClient = () => {
   removeAuthorizationHeader();
 };
+
+export default client;
