@@ -24,7 +24,8 @@ client.interceptors.response.use(
   },
 );
 
-export const configureClient = ({ token }) => {
+export const configureClient = token => {
+    console.log('TOKEN: ', token)
   if (token) {
     setAuthorizationHeader(token);
   }

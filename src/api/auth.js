@@ -1,5 +1,6 @@
 import client, { configureClient, resetClient } from './client'
 import storage from '../utils/storage'
+import { Router } from 'next/router'
 
 // Register
 export const register = (userData) => {
@@ -18,10 +19,12 @@ export const login = (credentials) => {
     return client
         .post('users/login/', credentials)
         .then(({ user, access_token }) => {
-            configureClient({ access_token });
+            configureClient(access_token);
             if (credentials.remember) {
                 storage.set('auth', access_token);
             }
             return user;
+        }).then(user => {
+            Router.push('/')
         })
 }

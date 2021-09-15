@@ -2,6 +2,8 @@ import { InferGetStaticPropsType } from 'next';
 import Navbar from '../src/components/layout/Navbar'
 import Article from '../src/components/posts/Article';
 
+import { getPosts } from '../src/api/posts' 
+
 interface Articles {
     body: string;
     id: number;
@@ -31,9 +33,7 @@ interface Articles {
   }
   
   export const getStaticProps = async () => {
-    const articles: Articles[] = await (
-      await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
-    ).json();
+    const articles: Articles[] = await getPosts();
   
     return {
       props: {

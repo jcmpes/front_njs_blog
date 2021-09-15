@@ -41,7 +41,7 @@ export class LoginForm extends React.Component<SignInProps, SignInState> {
 
     handleSubmit = (event : any) => {
         event.preventDefault();
-        login(this.state).then(user => Router.push("/")).catch(err => console.log)
+        login(this.state).then(user => console.log(user)).catch(err => console.log)
     }
 
     render() {
