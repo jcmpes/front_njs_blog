@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../styles/Article.module.css";
+import styles from "../../../styles/Article.module.css";
 
 interface Article {
   id: number;

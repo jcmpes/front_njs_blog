@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import { login, register } from '../../../api/auth';
 
 import styles from '../../../../styles/Auth.module.css';
@@ -40,7 +41,7 @@ export class LoginForm extends React.Component<SignInProps, SignInState> {
 
     handleSubmit = (event : any) => {
         event.preventDefault();
-        login(this.state).then(user => console.log(user)).catch(err => console.log(err))
+        login(this.state).then(user => Router.push("/")).catch(err => console.log)
     }
 
     render() {
@@ -58,9 +59,9 @@ export class LoginForm extends React.Component<SignInProps, SignInState> {
                         <label className={styles.label} htmlFor="password">Password</label>
                         <input className={styles.input} type='password' name='password' onChange={this.handleChange}/>
                     </div>
-                    <div className={styles.checkboxField}>
+                    <div className={styles.inputField}>
                         <label className={styles.label} htmlFor="remember">Remember me</label>
-                        <input className={styles.checkbox} type='checkbox' name='remember' onChange={this.handleChange}/>
+                        <input className={styles.input} type='checkbox' name='remember' onChange={this.handleChange}/>
                     </div>
                     <div className={styles.submit}>
                         <button className={styles.button}>Submit</button>
