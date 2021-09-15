@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import Navbar from './Navbar'
 
 type Props = {
   title?: string,
@@ -14,11 +15,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
     </Head>
     <header>
-      <nav>
-        <Link href='/'><a>Home</a></Link> | {' '}
-        <Link href='/list-fc'><a>List as Functional Component</a></Link> | {' '}
-        <Link href='/login'><a>Login</a></Link> | {' '}
-      </nav>
+      <Navbar />
     </header>
     {children}
     <footer>
