@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/api/register.js"  ],
+, "src/api/auth.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -65,6 +65,14 @@
     color: #bbb;
 }
 
+.checkbox {
+    margin-left: 1.2rem;
+}
+
+.checkboxField {
+    margin-bottom: 1.2rem;
+}
+
 .button {
     cursor: pointer;
     margin-right: 0.25em;

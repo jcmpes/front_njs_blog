@@ -1,7 +1,7 @@
 import React from 'react';
-import { register } from '../../../api/register';
+import { register } from '../../../api/auth';
 
-import styles from './RegisterForm.module.css'
+import styles from '../../../../styles/Auth.module.css'
 
 // Regexp to validate email address
 const Regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
@@ -66,7 +66,7 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
                 break;
         }
         this.setState(Object.assign(this.state, { errors,[name]: value }));
-}
+    }
 
     handleSubmit = (event : any) => {
         event.preventDefault();
@@ -85,44 +85,44 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
     render() {
         const { errors }  = this.state
         return (
-          <div className={styles.wrapper}>
-            <div className={styles.formWrapper}>
-                <h2>Sign Up</h2>
-                <form onSubmit={this.handleSubmit} noValidate >
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="first_name">First Name</label>
-                    <input className={styles.input} type='text' name='first_name' onChange={this.handleChange}/>
-                  </div>
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="last_name">Last Name</label>
-                    <input className={styles.input} type='text' name='last_name' onChange={this.handleChange}/>
-                  </div>
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="username">Username</label>
-                    <input className={styles.input} type='text' name='username' onChange={this.handleChange}/>
-                    {errors.username.length > 0 && <span className={styles.error}>{errors.username}</span>}
-                  </div>
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="email">Email</label>
-                    <input className={styles.input} type='email' name='email' onChange={this.handleChange}/>
-                    {errors.email.length > 0 && <span className={styles.error}>{errors.email}</span>}
-                  </div>
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="password">Password</label>
-                    <input className={styles.input} type='password' name='password' onChange={this.handleChange}/>
-                    {errors.password.length > 0 && <span className={styles.error}>{errors.password}</span>}
-                  </div>     
-                  <div className={styles.inputField}>
-                    <label className={styles.label} htmlFor="password_confirmation">Confirm Password</label>
-                    <input className={styles.input} type='password' name='password_confirmation' onChange={this.handleChange}/>
-                    {errors.password_confirmation.length > 0 && <span className={styles.error}>{errors.password_confirmation}</span>}
-                  </div>          
-                  <div className={styles.submit}>
-                    <button className={styles.button}>Register</button>
-                  </div>
-                </form>
+            <div className={styles.wrapper}>
+                <div className={styles.formWrapper}>
+                    <h2>Sign Up</h2>
+                    <form onSubmit={this.handleSubmit} noValidate >
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="first_name">First Name</label>
+                        <input className={styles.input} type='text' name='first_name' onChange={this.handleChange}/>
+                    </div>
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="last_name">Last Name</label>
+                        <input className={styles.input} type='text' name='last_name' onChange={this.handleChange}/>
+                    </div>
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="username">Username</label>
+                        <input className={styles.input} type='text' name='username' onChange={this.handleChange}/>
+                        {errors.username.length > 0 && <span className={styles.error}>{errors.username}</span>}
+                    </div>
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="email">Email</label>
+                        <input className={styles.input} type='email' name='email' onChange={this.handleChange}/>
+                        {errors.email.length > 0 && <span className={styles.error}>{errors.email}</span>}
+                    </div>
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="password">Password</label>
+                        <input className={styles.input} type='password' name='password' onChange={this.handleChange}/>
+                        {errors.password.length > 0 && <span className={styles.error}>{errors.password}</span>}
+                    </div>     
+                    <div className={styles.inputField}>
+                        <label className={styles.label} htmlFor="password_confirmation">Confirm Password</label>
+                        <input className={styles.input} type='password' name='password_confirmation' onChange={this.handleChange}/>
+                        {errors.password_confirmation.length > 0 && <span className={styles.error}>{errors.password_confirmation}</span>}
+                    </div>          
+                    <div className={styles.submit}>
+                        <button className={styles.button}>Register</button>
+                    </div>
+                    </form>
+                </div>
             </div>
-        </div>
-     );
+        );
     }
 }
