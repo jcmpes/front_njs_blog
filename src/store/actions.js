@@ -4,15 +4,20 @@ import {
   AUTH_LOGIN_SUCCESS,
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
-  LOAD_POSTS_FAILURE
+  LOAD_POSTS_FAILURE,
+  NEW_POST_REQUEST,
+  NEW_POST_SUCCESS,
+  NEW_POST_FAILURE,
 } from './types';
 
 import { toast } from 'react-toastify';
 import { login } from '../api/auth';
-import { getPostsLoaded } from './selectors'
-import { getPosts } from '../api/posts'
+import { getPostsLoaded } from './selectors';
+import { getPosts, newPost } from '../api/posts';
 
-// Log in actions
+/**
+ * LOGIN ACTIONS
+ */
 export const authLoginRequest = () => {
   return {
     type: AUTH_LOGIN_REQUEST,
@@ -48,14 +53,17 @@ export const loginAction = (credentials, history, location) => {
         dispatch(authLoginSuccess(response));
       }
       // Redirect
-        const { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
+      const { from } = location.state || { from: { pathname: '/' } };
+      history.replace(from);
     } catch (error) {
       dispatch(authLoginFailure(error));
     }
   };
 };
 
+/**
+ * LOAD POSTS ACTIONS
+ */
 export const postsLoadRequest = () => {
   return {
     type: LOAD_POSTS_REQUEST,
@@ -85,10 +93,49 @@ export const postsLoadAction = (token) => {
     }
     dispatch(postsLoadRequest());
     try {
-      const results = await getPosts(token)
-        dispatch(postsLoadSuccess(results));
+      const results = await getPosts(token);
+      dispatch(postsLoadSuccess(results));
     } catch (error) {
       dispatch(postsLoadFailure(error));
+    }
+  };
+};
+
+/**
+ * CREATE A NEW POST ACTIONS
+ */
+export const newPostRequest = () => {
+  return {
+    type: NEW_POST_REQUEST,
+  };
+};
+
+export const newPostSuccess = (post) => {
+  return {
+    type: NEW_POST_SUCCESS,
+    payload: post,
+  };
+};
+
+export const newPostFailure = (error) => {
+  return {
+    type: NEW_POST_FAILURE,
+    payload: error,
+    error: true,
+  };
+};
+
+export const newPostAction = (postData, history, token) => {
+  return async function (dispatch, getState) {
+    dispatch(newPostRequest());
+    try {
+      const createdPost = await newPost(postData, token);
+      dispatch(newPostSuccess(createdPost));
+      // redirect with history
+      // history.push(`/tweet/${createdTweet.id}`);
+      return createdPost;
+    } catch (error) {
+      dispatch(newPostFailure(error));
     }
   };
 };

@@ -13,8 +13,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="px-4 py-2">
-          <Link href="/about">
-            <a>About</a>
+          <Link href="/new-post">
+            <a>New Post</a>
           </Link>
         </li>
       </ul>

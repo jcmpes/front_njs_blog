@@ -4,6 +4,7 @@ import client, { configureClient } from '../src/api/client';
 import configureStore from '../src/store';
 import storage from '../src/utils/storage';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import '../styles/globals.css';
 
