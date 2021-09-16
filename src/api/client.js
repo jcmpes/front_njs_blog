@@ -30,8 +30,8 @@ export const configureClient = ({ access_token }) => {
   }
 };
 
-// export const resetClient = () => {
-//   removeAuthorizationHeader();
-// };
+export const resetClient = () => {
+  removeAuthorizationHeader();
+};
 
 export default client;

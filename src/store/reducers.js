@@ -1,6 +1,7 @@
 import {
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
+  AUTH_LOGOUT,
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
   NEW_POST_REQUEST,
@@ -27,6 +28,10 @@ export function auth(state = initialState.auth, action) {
         user: action.payload.user,
         token: action.payload.access_token,
       };
+		case AUTH_LOGOUT:
+			return {
+				isLogged: false
+			}
     default:
       return state;
   };

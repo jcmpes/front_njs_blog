@@ -1,6 +1,7 @@
 import {
   AUTH_LOGIN_FAILURE,
   AUTH_LOGIN_REQUEST,
+  AUTH_LOGOUT,
   AUTH_LOGIN_SUCCESS,
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
@@ -14,9 +15,10 @@ import { toast } from 'react-toastify';
 import { login } from '../api/auth';
 import { getPostsLoaded } from './selectors';
 import { getPosts, newPost } from '../api/posts';
+import { resetClient } from '../api/client';
 
 /**
- * LOGIN ACTIONS
+ * AUTH ACTIONS
  */
 export const authLoginRequest = () => {
   return {
@@ -41,7 +43,16 @@ export const authLoginFailure = (error) => {
   };
 };
 
-// Log in middleware
+// Logout action
+export const authLogout = () => {
+    resetClient()
+    toast.warning(`Bye bye 👋`);
+    return {
+        type: AUTH_LOGOUT
+    }
+}
+
+// Log in thunk middleware
 export const loginAction = (credentials, history, location) => {
   return async function (dispatch, getState) {
     dispatch(authLoginRequest());
