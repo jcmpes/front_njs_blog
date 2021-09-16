@@ -3,7 +3,7 @@ import axios from 'axios';
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_BASE_URL });
 
 const setAuthorizationHeader = (token) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+    client.defaults.headers.common['Authorization'] = `Token ${token}`;
 };
 
 const removeAuthorizationHeader = () => {
@@ -24,15 +24,14 @@ client.interceptors.response.use(
   },
 );
 
-export const configureClient = token => {
-    console.log('TOKEN: ', token)
-  if (token) {
-    setAuthorizationHeader(token);
+export const configureClient = ({ access_token }) => {
+  if (access_token) {
+    setAuthorizationHeader(access_token);
   }
 };
 
-export const resetClient = () => {
-  removeAuthorizationHeader();
-};
+// export const resetClient = () => {
+//   removeAuthorizationHeader();
+// };
 
 export default client;

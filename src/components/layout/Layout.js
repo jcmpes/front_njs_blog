@@ -3,11 +3,8 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Navbar from './Navbar'
 
-type Props = {
-  title?: string,
-}
 
-const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the default title' }) => (
+const Layout = ({ children, title = 'This is the default title' }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -20,7 +17,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
     {children}
     <footer>
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>{"JCM @copyright 2021"}</span>
     </footer>
   </div>
 )

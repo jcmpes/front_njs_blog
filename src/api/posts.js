@@ -2,9 +2,12 @@ import client from './client'
 
 
 // Get posts
-export const getPosts = () => {
+export const getPosts = (token) => {
+	const headers = {
+		'Authorization': `Token ${token}`
+	}
 	return client
-			.get('post/')
+			.get('post/', headers)
 			.then(({ data }) => {
 				return data;
 			})

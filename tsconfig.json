@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/api/auth.js"  ],
+, "src/api/auth.js", "src/components/auth/LoginPage/LoginForm.js", "pages/index.js", "src/components/layout/Layout.js", "src/components/layout/Navbar.js"  ],
   "exclude": [
     "node_modules"
   ]
