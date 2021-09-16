@@ -1,9 +1,18 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLogout } from '../../store/actions';
 import { getAuth } from '../../store/selectors';
 
 const Navbar = () => {
   const { isLogged, user } = useSelector(getAuth);
+  const dispatch = useDispatch();
+  const history = useRouter();
+
+  const handleLogout = () => {
+    dispatch(authLogout());
+    history.push('/')
+  };
 
   return (
     <nav className="flex px-16 py-8">
@@ -24,15 +33,15 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="px-4 py-2">
-            {
-                isLogged
-                ?   <Link href="/new-post">
-                        <a>Log Out</a>
-                    </Link>
-                :   <Link href="/login">
-                        <a>Log In</a>
-                    </Link>
-            }
+          {isLogged ? (
+            <a style={{ cursor: 'pointer' }} onClick={handleLogout}>
+              <a>Log Out</a>
+            </a>
+          ) : (
+            <Link href="/login">
+              <a>Log In</a>
+            </Link>
+          )}
         </li>
       </ul>
     </nav>
