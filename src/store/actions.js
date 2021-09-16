@@ -85,11 +85,9 @@ export const postsLoadAction = (token) => {
     }
     dispatch(postsLoadRequest());
     try {
-      const posts = await getPosts(token)
-        .then(({ results }) => {
-          return results;
-        })
-        dispatch(postsLoadSuccess(posts));
+      const results = await getPosts(token)
+      console.log('LOADED POSTS: ', results)
+        dispatch(postsLoadSuccess(results));
     } catch (error) {
       dispatch(postsLoadFailure(error));
     }
