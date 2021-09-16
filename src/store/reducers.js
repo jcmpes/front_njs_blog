@@ -36,7 +36,7 @@ export function posts(state = initialState.posts, action) {
             return {
                 ...state,
                 loaded: true,
-                data: [...state.date, action.payload]
+                data: action.payload
             };
         default:
             return state;

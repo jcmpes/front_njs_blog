@@ -21,11 +21,11 @@ export default function Home() {
 
   return (
     <Layout>
-        {console.log(posts)}
-        {/* { posts
+        { console.log(posts) }
+        { posts
             ? <PostList posts={posts} />
             : "No postss"
-        } */}
+        }
     </Layout>
   );
 }
