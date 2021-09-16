@@ -24,13 +24,13 @@ export default function Filters({ filters, setFilters }) {
           <option value="title">Title</option>
         </select>
         <div className="absolute inset-y-0 right-3 flex items-center px-2 pointer-events-none">
-          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+          {/* <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
             <path
               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
               clipRule="evenodd"
               fillRule="evenodd"
             ></path>
-          </svg>
+          </svg> */}
         </div>
       </div>
       {/* Ordering select */}
@@ -48,13 +48,13 @@ export default function Filters({ filters, setFilters }) {
           <option value="desc">Desc</option>
         </select>
         <div className="absolute inset-y-0 right-3 flex items-center px-2 pointer-events-none">
-          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+          {/* <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
             <path
               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
               clipRule="evenodd"
               fillRule="evenodd"
             ></path>
-          </svg>
+          </svg> */}
         </div>
       </div>
     </div>

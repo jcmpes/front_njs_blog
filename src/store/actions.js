@@ -131,8 +131,8 @@ export const newPostAction = (postData, history, token) => {
     try {
       const createdPost = await newPost(postData, token);
       dispatch(newPostSuccess(createdPost));
-      // redirect with history
-      // history.push(`/tweet/${createdTweet.id}`);
+      // Redirect with history
+      history.push(`/`);
       return createdPost;
     } catch (error) {
       dispatch(newPostFailure(error));
