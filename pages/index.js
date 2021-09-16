@@ -12,7 +12,7 @@ import compareValues from '../src/utils/compareValues';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState(useSelector(getPostsData));
+  const posts = useSelector(getPostsData);
   const token = useSelector(getToken);
   
   const [filteredPosts, setFilteredPosts] = useState(posts)
