@@ -15,8 +15,6 @@ export default function Home() {
   const posts = useSelector(getPostsData);
   const token = useSelector(getToken);
   
-  const [filteredPosts, setFilteredPosts] = useState(posts)
-
   useEffect(() => {
     dispatch(postsLoadAction(token));
   }, []);

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import client from './client';
 
 // Get posts
@@ -19,3 +20,11 @@ export const newPost = (postData, token) => {
 		return response;
 	});
 };
+
+// Delete post
+export const deletePost = (id, token) => {
+	const headers = {
+		Authorization: `Token ${token}`,
+	};
+	return client.delete(`delete/${id}/`, headers).catch(err => toast.error('Unauthorized'))	
+}

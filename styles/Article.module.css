@@ -3,7 +3,11 @@
 }
 
 .card {
-  @apply m-4 p-6 text-left md:w-11/12 no-underline border border-gray-100 rounded-lg transition-all duration-150 ease-in-out;
+  @apply table-column m-4 p-6 text-left md:w-11/12 no-underline border border-gray-100 rounded-lg transition-all duration-150 ease-in-out;
+}
+
+.image {
+    @apply w-full object-cover mb-5
 }
 
 .card:hover,
@@ -18,6 +22,18 @@
 
 .card p {
   @apply m-0 text-2xl;
+}
+
+.content {
+    @apply flex justify-between 
+}
+
+.delete {
+    @apply w-5 h-5 bg-trashcan
+}
+
+.delete:hover {
+    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
 }
 
 @media (max-width: 600px) {

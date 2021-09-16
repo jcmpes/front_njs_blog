@@ -15,9 +15,9 @@ const Layout = ({ children, title = 'This is the default title' }) => (
       <Navbar />
     </header>
     {children}
-    <footer className="absolute bottom-0 w-full h-10 text-center bg-white">
+    <footer className="absolute flex justify-center items-center bottom-0 w-full h-20 bg-white">
       <hr />
-      <span className="align-middle">{"Made with ❤️ for Kas Factory®"}</span>
+      <span className="text-center align-middle">{"Made with ❤️ for Kas Factory®"}</span>
     </footer>
   </div>
 )

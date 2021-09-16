@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { newPostAction } from '../../store/actions';
 import { getToken } from '../../store/selectors';
-import styles from './NewPostForm.module.css';
 
 const NewPostForm = ({ onSubmit }) => {
     const history = useRouter();

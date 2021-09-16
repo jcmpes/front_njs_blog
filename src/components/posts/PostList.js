@@ -21,9 +21,11 @@ export default function PostList({ posts }) {
             <div className="grid grid-cols-1 md:grid-cols-2 space-x-5 space-y-5">
                 {posts.map((item) => (
                     <Article
+                        image={item.image}
                         body={item.body}
                         title={item.title}
-                        userId={item.userId}
+                        user={item.user}
+                        id={item.pk}
                         key={item.pk}
                     />
                 ))}
