@@ -6,26 +6,33 @@ import Layout from '../src/components/layout/Layout';
 import PostList from '../src/components/posts/PostList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsData, getToken } from '../src/store/selectors';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { postsLoadAction } from '../src/store/actions';
+import compareValues from '../src/utils/compareValues';
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const [posts, setPosts] = useState(useSelector(getPostsData));
+  const token = useSelector(getToken);
+  
+  const [filteredPosts, setFilteredPosts] = useState(posts)
 
-    const dispatch = useDispatch()
-    const posts = useSelector(getPostsData)
-    const token = useSelector(getToken)
+  useEffect(() => {
+    dispatch(postsLoadAction(token));
+  }, []);
 
-    useEffect(() => {
-        dispatch(postsLoadAction(token));
-    }, [])
+  
 
   return (
     <Layout>
-        { console.log(posts) }
-        { posts
-            ? <PostList posts={posts} />
-            : "No postss"
-        }
+      {console.log(posts)}
+      {posts.length ? (
+        <PostList
+          posts={posts}
+        />
+      ) : (
+        'No posts'
+      )}
     </Layout>
   );
 }
