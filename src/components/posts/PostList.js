@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import compareValues from "../../utils/compareValues";
-import Navbar from "../layout/Navbar"
 import Article from "./Article"
 import Filters from "./Filters"
 
@@ -13,6 +12,7 @@ export default function PostList({ posts }) {
     useEffect(() => {
         posts.sort(compareValues(filters.filter, filters.ordering));
         console.log(posts)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [filters]);
 
     return (

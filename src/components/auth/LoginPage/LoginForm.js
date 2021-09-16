@@ -1,7 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import Router from 'next/router';
-import { login, register } from '../../../api/auth';
+import Link from 'next/link';
 
 import styles from '../../../../styles/Auth.module.css';
 
@@ -58,12 +56,12 @@ const LoginForm = ({ onSubmit }) => {
               onChange={handleChange}
             />
           </div>
-          <div className={styles.inputField}>
+          <div className={styles.checkboxField}>
             <label className={styles.label} htmlFor="remember">
               Remember me
             </label>
             <input
-              className={styles.input}
+              className={styles.checkbox}
               type="checkbox"
               name="remember"
               onChange={handleChange}
@@ -72,6 +70,9 @@ const LoginForm = ({ onSubmit }) => {
           <div className={styles.submit}>
             <button className={styles.button}>Submit</button>
           </div>
+          <Link href="/register">
+          <a style={{cursor: "default"}}>Want to <span style={{ cursor: "pointer", color: "green" }}>register</span> a new user?</a>
+          </Link>
         </form>
       </div>
     </div>

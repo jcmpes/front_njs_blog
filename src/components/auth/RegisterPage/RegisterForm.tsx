@@ -1,5 +1,4 @@
 import React from 'react';
-import link from 'next/link';
 import { register } from '../../../api/auth';
 
 import styles from '../../../../styles/Auth.module.css';
@@ -181,9 +180,6 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
             <div className={styles.submit}>
               <button className={styles.button}>Register</button>
             </div>
-            <Link href="/register">
-                Want to <a>register</a> a new user?
-            </Link>
           </form>
         </div>
       </div>
