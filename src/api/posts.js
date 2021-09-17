@@ -13,7 +13,6 @@ export const newPost = (postData) => {
 	const headers = {
 		'Content-Type': 'multipart/form-data',
 	};
-	console.log(token)
 	return client
 		.post('post/', postData, headers)
 		.then(response => response)
