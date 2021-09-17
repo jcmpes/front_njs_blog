@@ -179,7 +179,7 @@ export const newPostAction = (postData, history, token) => {
         }
         if (createdPost.image) {
             const error = createdPost.image[0];
-            toast.error(`Image: ${error});
+            toast.error(`Image: ${error}`);
         }
       }
     } catch (error) {
