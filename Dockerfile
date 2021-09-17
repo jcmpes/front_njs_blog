@@ -1,30 +1,30 @@
-#Creates a layer from node:alpine image.
-FROM node:alpine
+FROM node:lts as dependencies
+WORKDIR /my-project
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
-#Creates directories
-RUN mkdir -p /usr/src/app
+FROM node:lts as builder
+WORKDIR /my-project
+COPY . .
+COPY --from=dependencies /my-project/node_modules ./node_modules
+RUN yarn build
 
-#Sets an environment variable
-ENV PORT 3000
+FROM node:lts as runner
+WORKDIR /my-project
+ENV NODE_ENV production
 
-#Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY, and ADD commands
-WORKDIR /usr/src/app
+COPY --from=builder /my-project/tailwind.config.js ./
+COPY --from=builder /my-project/tsconfig.js ./
+COPY --from=builder /my-project/next-env.d.ts ./
+COPY --from=builder /my-project/next.config.js ./
+COPY --from=builder /my-project/.env ./
+COPY --from=builder /my-project/public ./public
+COPY --from=builder /my-project/pages ./pages
+COPY --from=builder /my-project/src ./src
+COPY --from=builder /my-project/styles ./styles
+COPY --from=builder /my-project/.next ./.next
+COPY --from=builder /my-project/node_modules ./node_modules
+COPY --from=builder /my-project/package.json ./package.json
 
-#Copy new files or directories into the filesystem of the container
-COPY package.json /usr/src/app
-COPY package-lock.json /usr/src/app
-
-#Execute commands in a new layer on top of the current image and commit the results
-RUN npm install
-
-##Copy new files or directories into the filesystem of the container
-COPY . /usr/src/app
-
-#Execute commands in a new layer on top of the current image and commit the results
-RUN npm run start
-
-#Informs container runtime that the container listens on the specified network ports at runtime
 EXPOSE 3000
-
-#Allows you to configure a container that will run as an executable
-ENTRYPOINT ["npm", "run"]
+CMD ["yarn", "dev"]
