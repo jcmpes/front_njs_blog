@@ -170,16 +170,16 @@ export const newPostAction = (postData, history, token) => {
         return createdPost;
       } else {
         if (createdPost.title) {
-          const error = createdPost.title;
-          toast.error('Error: ', error);
+          const error = createdPost.title[0];
+          toast.error(`Title: ${error}`);
         }
         if (createdPost.body) {
-          const error = createdPost.body;
-          toast.error('Error: ', error);
+          const error = createdPost.body[0];
+          toast.error(`Body: ${error}`);
         }
         if (createdPost.image) {
-            const error = createdPost.image;
-            toast.error('Error: ', error);
+            const error = createdPost.image[0];
+            toast.error(`Image: ${error});
         }
       }
     } catch (error) {
