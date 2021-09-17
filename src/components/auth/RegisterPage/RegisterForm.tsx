@@ -103,7 +103,7 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
             onClose: () => (window.location.href = '/login'),
             autoClose: 2000,
           };
-          toast.success(`Hooray! Welcome ${response.username}`, toastOptions);
+          toast.success(`🥳 Hooray! Welcome ${response.username}`, toastOptions);
         }
       });
     }
