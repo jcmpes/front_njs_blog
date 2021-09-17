@@ -6,6 +6,8 @@ import {
   LOAD_POSTS_SUCCESS,
   NEW_POST_REQUEST,
   NEW_POST_SUCCESS,
+	DELETE_POST,
+	DELETE_POST_SUCCESS
 } from './types';
 
 export const initialState = {
@@ -50,6 +52,11 @@ export function posts(state = initialState.posts, action) {
         ...state,
         data: [...state.data, action.payload],
       };
+		case DELETE_POST_SUCCESS:
+			return {
+				...state,
+				data: state.data.filter(item => item.pk != action.payload)
+			}
     default:
       return state;
   };

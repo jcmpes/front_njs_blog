@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../../styles/Article.module.css';
-import { deletePost } from '../../api/posts';
+import { deletePostAction } from '../../store/actions';
 import { getAuth, getToken } from '../../store/selectors';
 
 interface Article {
@@ -10,20 +11,28 @@ interface Article {
   body: string;
   title: string;
   image: string;
+  date: Date;
+  setModalParams: any;
 }
 
-const Article = ({ id, image, user, body, title }: Article) => {
+const Article = ({
+  id,
+  image,
+  user,
+  body,
+  title,
+  date,
+  setModalParams,
+}: Article) => {
   const token = useSelector(getToken);
   const currentUser = useSelector(getAuth);
 
   const handleDelete = async (event) => {
-      if (event.target.name === 'delete') {
-          event.preventDefault();
-          event.stopPropagation();
-          await deletePost(id, token);
-      } else {
-
-      }
+    if (event.target.name === 'delete') {
+      event.preventDefault();
+      event.stopPropagation();
+      setModalParams((prevState) => ({ ...prevState, show: true, id, token }));
+    }
   };
 
   return (
@@ -33,13 +42,21 @@ const Article = ({ id, image, user, body, title }: Article) => {
         <div className={styles.content}>
           <div className={styles.details}>
             <h3>{title} &rarr;</h3>
-            <h6 className={styles.author}>{user}</h6>
-            <p>{body.length > 50 ? `${body.slice(0, 45)}...` : body}</p>
+            <p>{ body && body.length > 50 ? `${body.slice(0, 45)}...` : body}</p>
+            <p className={styles.author} style={{ fontSize: '1rem' }}>
+              {user}
+            </p>
+            <p className={styles.date} style={{ fontSize: '1rem' }}>
+              {date}
+            </p>
           </div>
-          {
-              currentUser.user && currentUser.user.email === user
-              && <button onClick={handleDelete} name="delete" className={styles.delete}></button>
-          }  
+          {currentUser.user && currentUser.user.email === user && (
+            <button
+              onClick={handleDelete}
+              name="delete"
+              className={styles.delete}
+            ></button>
+          )}
         </div>
       </a>
     </Link>

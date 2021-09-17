@@ -9,12 +9,15 @@ import {
   NEW_POST_REQUEST,
   NEW_POST_SUCCESS,
   NEW_POST_FAILURE,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE
 } from './types';
 
 import { toast } from 'react-toastify';
 import { login } from '../api/auth';
 import { getPostsLoaded } from './selectors';
-import { getPosts, newPost } from '../api/posts';
+import { deletePost, getPosts, newPost } from '../api/posts';
 import { resetClient } from '../api/client';
 
 /**
@@ -150,3 +153,41 @@ export const newPostAction = (postData, history, token) => {
     }
   };
 };
+
+/**
+ * DELETE POST ACTIONS
+ */
+
+export const deletePostRequest = () => {
+    return {
+      type: DELETE_POST_REQUEST,
+    };
+  };
+  
+  export const deletePostSuccess = (id) => {
+    return {
+      type: DELETE_POST_SUCCESS,
+      payload: id,
+    };
+  };
+  
+  export const deletePostFailure = (error) => {
+    return {
+      type: DELETE_POST_FAILURE,
+      payload: error,
+      error: true,
+    };
+  };
+  
+  export const deletePostAction = (id, token, history) => {
+    return async function (dispatch, getState) {
+      dispatch(deletePostRequest());
+      try {
+        await deletePost(id, token);
+        dispatch(deletePostSuccess(id));
+        toast.warning(`It's gone 👋`);
+      } catch (error) {
+        dispatch(deletePostFailure(error));
+      }
+    };
+  };

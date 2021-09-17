@@ -29,11 +29,20 @@
 }
 
 .delete {
-    @apply w-5 h-5 bg-trashcan
+    @apply w-6 h-6 bg-trashcan mt-2
 }
 
 .delete:hover {
     filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+
+.date,
+.author {
+    @apply font-thin text-xs text-gray-400
+}
+
+.author {
+    @apply relative top-1
 }
 
 @media (max-width: 600px) {

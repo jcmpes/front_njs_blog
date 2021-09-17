@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { newPostAction } from '../../store/actions';
 import { getToken } from '../../store/selectors';
+import FileUpload from '../shared/FileUpload';
 
 const NewPostForm = ({ onSubmit }) => {
     const history = useRouter();
@@ -11,11 +12,18 @@ const NewPostForm = ({ onSubmit }) => {
     const [postData, setPostData] = React.useState({
         title: '',
         body: '',
+        image: ''
       });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(newPostAction(postData, history));
+    const formData = new FormData();
+    formData.append('title', postData.title);
+    formData.append('body', postData.body);
+    if (postData.image) {
+        formData.append('image', postData.image);
+    }
+    dispatch(newPostAction(formData, history, token));
   };
 
   const handleChange = (event) => {
@@ -47,6 +55,13 @@ const NewPostForm = ({ onSubmit }) => {
           name="body"
           value={postData.body}
           onChange={handleChange}
+        />
+        <label className="ml-5" htmlFor="body">
+          Image
+        </label>
+        <FileUpload 
+            postData={postData}
+            setPostData={setPostData}
         />
         <button
             className="font-bold text-xl text-white w-full rounded block ml-5 mr-5 mb-5 mt-2 bg-green-300 hover:bg-green-400 active:bg-green-500 p-5"

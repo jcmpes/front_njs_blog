@@ -1,7 +1,4 @@
-import { InferGetStaticPropsType } from 'next';
-import Navbar from '../src/components/layout/Navbar';
-import Article from '../src/components/posts/Article';
-
+import EmptyList from '../src/components/posts/EmptyList'
 import Layout from '../src/components/layout/Layout';
 import PostList from '../src/components/posts/PostList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +25,7 @@ export default function Home() {
           posts={posts}
         />
       ) : (
-        'No posts'
+        <EmptyList />
       )}
     </Layout>
   )
