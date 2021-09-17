@@ -21,6 +21,7 @@ export default function Home() {
   
   useEffect(() => {
     dispatch(postsLoadAction(token));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   
