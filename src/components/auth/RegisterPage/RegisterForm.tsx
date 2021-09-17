@@ -2,6 +2,7 @@ import React from 'react';
 import { register } from '../../../api/auth';
 
 import styles from '../../../../styles/Auth.module.css';
+import { toast } from 'react-toastify';
 
 // Regexp to validate email address
 const Regex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
@@ -86,7 +87,25 @@ export class RegisterForm extends React.Component<SignUpProps, SignUpState> {
       const userData = { ...this.state };
       delete userData.errors;
       console.log('userData: ', userData);
-      register(userData);
+      register(userData).then((response) => {
+        if (response.email && Array.isArray(response.email)) {
+          toast.error(`Email: ${response.email}`);
+        }
+        if (response.username && Array.isArray(response.username)) {
+          toast.error(`Username: ${response.username}`);
+        }
+        if (response.password && Array.isArray(response.password)) {
+          toast.error(`Password: ${response.password}`);
+        }
+
+        if (response.username && !Array.isArray(response.username)) {
+          const toastOptions = {
+            onClose: () => (window.location.href = '/login'),
+            autoClose: 2000,
+          };
+          toast.success(`Hooray! Welcome ${response.username}`, toastOptions);
+        }
+      });
     }
   };
 
