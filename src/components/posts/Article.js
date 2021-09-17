@@ -1,18 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
-import Image from 'next/image'
 import { useSelector } from 'react-redux';
 import styles from '../../../styles/Article.module.css';
 import { getAuth, getToken } from '../../store/selectors';
-
-interface Article {
-  id: number;
-  user: string;
-  body: string;
-  title: string;
-  image: string;
-  date: Date;
-  setModalParams: any;
-}
 
 const Article = ({
   id,
@@ -22,7 +13,7 @@ const Article = ({
   title,
   date,
   setModalParams,
-}: Article) => {
+}) => {
   const token = useSelector(getToken);
   const currentUser = useSelector(getAuth);
 
