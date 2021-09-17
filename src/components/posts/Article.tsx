@@ -37,7 +37,7 @@ const Article = ({
   return (
     <Link onClick={handleDelete} href=''>
       <a className={styles.card}>
-        <Image width={500} height={500} className={styles.image} src={image} />
+        <img className={styles.image} src={image} />
         <div className={styles.content}>
           <div className={styles.details}>
             <h3>{title} &rarr;</h3>
