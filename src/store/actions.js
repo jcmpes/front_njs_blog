@@ -181,6 +181,10 @@ export const newPostAction = (postData, history, token) => {
             const error = createdPost.image[0];
             toast.error(`Image: ${error}`);
         }
+        if (createdPost.non_field_errors) {
+            const error = createdPost.image[0];
+            toast.error(`Error: ${error}`);
+        }
       }
     } catch (error) {
       dispatch(newPostFailure(error));
