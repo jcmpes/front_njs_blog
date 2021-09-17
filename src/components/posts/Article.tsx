@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image'
+import { useSelector } from 'react-redux';
 import styles from '../../../styles/Article.module.css';
-import { deletePostAction } from '../../store/actions';
 import { getAuth, getToken } from '../../store/selectors';
 
 interface Article {
@@ -38,7 +37,7 @@ const Article = ({
   return (
     <Link onClick={handleDelete} href={`/article/${id}`}>
       <a className={styles.card}>
-        <img className={styles.image} src={image} />
+        <Image width={500} height={500} className={styles.image} src={image} />
         <div className={styles.content}>
           <div className={styles.details}>
             <h3>{title} &rarr;</h3>

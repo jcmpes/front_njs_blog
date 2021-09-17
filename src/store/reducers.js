@@ -7,7 +7,8 @@ import {
   NEW_POST_REQUEST,
   NEW_POST_SUCCESS,
 	DELETE_POST,
-	DELETE_POST_SUCCESS
+	DELETE_POST_SUCCESS,
+	RESTORE_TOKEN,
 } from './types';
 
 export const initialState = {
@@ -33,6 +34,15 @@ export function auth(state = initialState.auth, action) {
 		case AUTH_LOGOUT:
 			return {
 				isLogged: false
+			}
+		case RESTORE_TOKEN:
+			return {
+				isLogged: true,
+				token: action.payload.token,
+				user: {
+					...state.user,
+					email: action.payload.email
+				}
 			}
     default:
       return state;

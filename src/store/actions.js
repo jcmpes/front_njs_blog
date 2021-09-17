@@ -11,7 +11,8 @@ import {
   NEW_POST_FAILURE,
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
-  DELETE_POST_FAILURE
+  DELETE_POST_FAILURE,
+  RESTORE_TOKEN
 } from './types';
 
 import { toast } from 'react-toastify';
@@ -19,6 +20,7 @@ import { login } from '../api/auth';
 import { getPostsLoaded } from './selectors';
 import { deletePost, getPosts, newPost } from '../api/posts';
 import { resetClient } from '../api/client';
+import storage from '../utils/storage';
 
 /**
  * AUTH ACTIONS
@@ -49,9 +51,23 @@ export const authLoginFailure = (error) => {
 // Logout action
 export const authLogout = () => {
     resetClient()
+    const sessionToken = storage.get('auth')
+    if (sessionToken) {
+        storage.remove('auth');
+        storage.remove('email');
+    }
     toast.warning(`Bye bye 👋`);
     return {
         type: AUTH_LOGOUT
+    }
+}
+
+// Restore token action
+export const restoreToken = (token, email) => {
+    return {
+        type: RESTORE_TOKEN,
+        payload: { token, email }
+
     }
 }
 
@@ -144,9 +160,13 @@ export const newPostAction = (postData, history, token) => {
     dispatch(newPostRequest());
     try {
       const createdPost = await newPost(postData, token);
+      const toastOptions = {
+        onClose: () => history.push('/'),
+        autoClose: 2000
+      };
       dispatch(newPostSuccess(createdPost));
+      toast.success('🦄 Wow so easy!', toastOptions)
       // Redirect with history
-      history.push(`/`);
       return createdPost;
     } catch (error) {
       dispatch(newPostFailure(error));
@@ -157,7 +177,6 @@ export const newPostAction = (postData, history, token) => {
 /**
  * DELETE POST ACTIONS
  */
-
 export const deletePostRequest = () => {
     return {
       type: DELETE_POST_REQUEST,

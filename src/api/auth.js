@@ -21,6 +21,7 @@ export const login = (credentials) => {
       configureClient(access_token);
       if (credentials.remember) {
         storage.set('auth', access_token);
+        storage.set('email', user.email);
       }
       return { user, access_token };
     });

@@ -34,9 +34,9 @@ const Navbar = () => {
         </li>
         <li className="px-4 py-2">
           {isLogged ? (
-            <a style={{ cursor: 'pointer' }} onClick={handleLogout}>
-              <a>Log Out</a>
-            </a>
+            <p style={{ cursor: 'pointer' }} onClick={handleLogout}>
+              <p>Log Out</p>
+            </p>
           ) : (
             <Link href="/login">
               <a>Log In</a>
