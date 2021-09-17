@@ -5,10 +5,9 @@ import { newPostAction } from '../../store/actions';
 import { getToken } from '../../store/selectors';
 import FileUpload from '../shared/FileUpload';
 
-const NewPostForm = ({ onSubmit }) => {
+const NewPostForm = () => {
     const history = useRouter();
     const dispatch = useDispatch();
-    const token = useSelector(getToken)
     const [postData, setPostData] = React.useState({
         title: '',
         body: '',
@@ -23,7 +22,7 @@ const NewPostForm = ({ onSubmit }) => {
     if (postData.image) {
         formData.append('image', postData.image);
     }
-    dispatch(newPostAction(formData, history, token));
+    dispatch(newPostAction(formData, history));
   };
 
   const handleChange = (event) => {

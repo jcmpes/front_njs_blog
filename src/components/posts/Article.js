@@ -14,14 +14,13 @@ const Article = ({
   date,
   setModalParams,
 }) => {
-  const token = useSelector(getToken);
   const currentUser = useSelector(getAuth);
 
   const handleDelete = async (event) => {
     if (event.target.name === 'delete') {
       event.preventDefault();
       event.stopPropagation();
-      setModalParams((prevState) => ({ ...prevState, show: true, id, token }));
+      setModalParams((prevState) => ({ ...prevState, show: true, id }));
     }
   };
 

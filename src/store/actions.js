@@ -114,7 +114,7 @@ export const postsLoadFailure = (error) => {
   };
 };
 
-export const postsLoadAction = (token) => {
+export const postsLoadAction = () => {
   return async function (dispatch, getState) {
     const postsLoaded = getPostsLoaded(getState());
     if (postsLoaded) {
@@ -122,7 +122,7 @@ export const postsLoadAction = (token) => {
     }
     dispatch(postsLoadRequest());
     try {
-      const results = await getPosts(token);
+      const results = await getPosts();
       dispatch(postsLoadSuccess(results));
     } catch (error) {
       dispatch(postsLoadFailure(error));
@@ -154,11 +154,11 @@ export const newPostFailure = (error) => {
   };
 };
 
-export const newPostAction = (postData, history, token) => {
+export const newPostAction = (postData, history) => {
   return async function (dispatch, getState) {
     dispatch(newPostRequest());
     try {
-      const createdPost = await newPost(postData, token);
+      const createdPost = await newPost(postData);
       if (createdPost.published) {
         const toastOptions = {
           onClose: () => history.push('/'),
@@ -216,11 +216,11 @@ export const deletePostFailure = (error) => {
   };
 };
 
-export const deletePostAction = (id, token, history) => {
+export const deletePostAction = (id) => {
   return async function (dispatch, getState) {
     dispatch(deletePostRequest());
     try {
-      await deletePost(id, token);
+      await deletePost(id);
       dispatch(deletePostSuccess(id));
       toast.warning(`It's gone 👋`);
     } catch (error) {

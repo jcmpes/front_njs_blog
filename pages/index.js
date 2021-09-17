@@ -11,7 +11,6 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const posts = useSelector(getPostsData);
-  const token = useSelector(getToken);
   const access_token = storage.get('auth');
   const email = storage.get('email');
 
@@ -20,7 +19,7 @@ export default function Home() {
     }
   
   useEffect(() => {
-    dispatch(postsLoadAction(token));
+    dispatch(postsLoadAction());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

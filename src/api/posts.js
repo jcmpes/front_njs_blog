@@ -2,20 +2,16 @@ import { toast } from 'react-toastify';
 import client from './client';
 
 // Get posts
-export const getPosts = (token) => {
-  const headers = {
-    // Authorization: `Token ${token}`,
-  };
-  return client.get('post/', headers).then(({ results }) => {
+export const getPosts = () => {
+  return client.get('post/').then(({ results }) => {
     return results;
   });
 };
 
 // New post
-export const newPost = (postData, token) => {
+export const newPost = (postData) => {
 	const headers = {
 		'Content-Type': 'multipart/form-data',
-		// 'Authorization': `Token ${token}`,
 	};
 	console.log(token)
 	return client
@@ -25,9 +21,6 @@ export const newPost = (postData, token) => {
 };
 
 // Delete post
-export const deletePost = (id, token) => {
-	const headers = {
-		// Authorization: `Token ${token}`,
-	};
-	return client.delete(`delete/${id}/`, headers).catch(err => toast.error('Unauthorized'))	
+export const deletePost = (id) => {
+	return client.delete(`delete/${id}/`).catch(err => toast.error('Unauthorized'))	
 }
