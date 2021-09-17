@@ -4,7 +4,7 @@ import client from './client';
 // Get posts
 export const getPosts = (token) => {
   const headers = {
-    Authorization: `Token ${token}`,
+    // Authorization: `Token ${token}`,
   };
   return client.get('post/', headers).then(({ results }) => {
     return results;
@@ -14,8 +14,10 @@ export const getPosts = (token) => {
 // New post
 export const newPost = (postData, token) => {
 	const headers = {
-		Authorization: `Token ${token}`,
+		'Content-Type': 'multipart/form-data',
+		// 'Authorization': `Token ${token}`,
 	};
+	console.log(token)
 	return client
 		.post('post/', postData, headers)
 		.then(response => response)
@@ -25,7 +27,7 @@ export const newPost = (postData, token) => {
 // Delete post
 export const deletePost = (id, token) => {
 	const headers = {
-		Authorization: `Token ${token}`,
+		// Authorization: `Token ${token}`,
 	};
 	return client.delete(`delete/${id}/`, headers).catch(err => toast.error('Unauthorized'))	
 }
