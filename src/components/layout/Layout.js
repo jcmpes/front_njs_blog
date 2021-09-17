@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Navbar from './Navbar'
 
 
-const Layout = ({ children, title = 'This is the default title' }) => (
+const Layout = ({ children, title = 'weBlog | 4 all your blogging needs' }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -14,8 +14,10 @@ const Layout = ({ children, title = 'This is the default title' }) => (
     <header>
       <Navbar />
     </header>
-    {children}
-    <footer className="absolute flex justify-center items-center bottom-0 w-full h-20 bg-white">
+    <div className="mb-10">
+        {children}
+    </div>
+    <footer className="absolute flex justify-center items-center bottom-0 h-10 w-full bg-white">
       <hr />
       <span className="text-center align-middle">{"Made with ❤️ for Kas Factory®"}</span>
     </footer>

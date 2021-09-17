@@ -9,9 +9,6 @@ import storage from '../src/utils/storage';
 
 export default function Home() {
 
-
-    
-
   const dispatch = useDispatch();
   const posts = useSelector(getPostsData);
   const token = useSelector(getToken);
