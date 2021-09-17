@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 function FileUpload({ postData, setPostData }) {
     const handleChange = (ev) => {
       // set course image
@@ -14,7 +16,7 @@ function FileUpload({ postData, setPostData }) {
         <br />
         <label
             className="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer hover:bg-purple-600 hover:text-white text-purple-600 ease-linear transition-all duration-150">
-            <input type='file' class="hidden" onChange={handleChange}/>
+            <input type='file' className="hidden" onChange={handleChange}/>
             {postData.preview
                 ? <img 
                 alt={''}
@@ -23,7 +25,7 @@ function FileUpload({ postData, setPostData }) {
                 />
                 : null
                 }
-            <span class="mt-2 text-base leading-normal">Select a file</span>
+            <span className="mt-2 text-base leading-normal">Select a file</span>
             
         </label>
         
