@@ -35,7 +35,7 @@ const Article = ({
   };
 
   return (
-    <Link onClick={handleDelete} href={`/article/${id}`}>
+    <Link onClick={handleDelete} href=''>
       <a className={styles.card}>
         <Image width={500} height={500} className={styles.image} src={image} />
         <div className={styles.content}>
