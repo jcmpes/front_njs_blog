@@ -16,9 +16,10 @@ export const newPost = (postData, token) => {
 	const headers = {
 		Authorization: `Token ${token}`,
 	};
-	return client.post('post/', postData, headers).then(response => {
-		return response;
-	});
+	return client
+		.post('post/', postData, headers)
+		.then(response => response)
+		.catch(err => err)
 };
 
 // Delete post

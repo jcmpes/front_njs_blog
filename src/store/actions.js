@@ -12,7 +12,7 @@ import {
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE,
-  RESTORE_TOKEN
+  RESTORE_TOKEN,
 } from './types';
 
 import { toast } from 'react-toastify';
@@ -50,26 +50,25 @@ export const authLoginFailure = (error) => {
 
 // Logout action
 export const authLogout = () => {
-    resetClient()
-    const sessionToken = storage.get('auth')
-    if (sessionToken) {
-        storage.remove('auth');
-        storage.remove('email');
-    }
-    toast.warning(`Bye bye 👋`);
-    return {
-        type: AUTH_LOGOUT
-    }
-}
+  resetClient();
+  const sessionToken = storage.get('auth');
+  if (sessionToken) {
+    storage.remove('auth');
+    storage.remove('email');
+  }
+  toast.warning(`Bye bye 👋`);
+  return {
+    type: AUTH_LOGOUT,
+  };
+};
 
 // Restore token action
 export const restoreToken = (token, email) => {
-    return {
-        type: RESTORE_TOKEN,
-        payload: { token, email }
-
-    }
-}
+  return {
+    type: RESTORE_TOKEN,
+    payload: { token, email },
+  };
+};
 
 // Log in thunk middleware
 export const loginAction = (credentials, history, location) => {
@@ -160,14 +159,29 @@ export const newPostAction = (postData, history, token) => {
     dispatch(newPostRequest());
     try {
       const createdPost = await newPost(postData, token);
-      const toastOptions = {
-        onClose: () => history.push('/'),
-        autoClose: 2000
-      };
-      dispatch(newPostSuccess(createdPost));
-      toast.success('🦄 Wow so easy!', toastOptions)
-      // Redirect with history
-      return createdPost;
+      if (createdPost.published) {
+        const toastOptions = {
+          onClose: () => history.push('/'),
+          autoClose: 2000,
+        };
+        dispatch(newPostSuccess(createdPost));
+        toast.success('🦄 Wow so easy!', toastOptions);
+        // Redirect with history
+        return createdPost;
+      } else {
+        if (createdPost.title) {
+          const error = createdPost.title;
+          toast.error('Error: ', error);
+        }
+        if (createdPost.body) {
+          const error = createdPost.body;
+          toast.error('Error: ', error);
+        }
+        if (createdPost.image) {
+            const error = createdPost.image;
+            toast.error('Error: ', error);
+        }
+      }
     } catch (error) {
       dispatch(newPostFailure(error));
     }
@@ -178,35 +192,35 @@ export const newPostAction = (postData, history, token) => {
  * DELETE POST ACTIONS
  */
 export const deletePostRequest = () => {
-    return {
-      type: DELETE_POST_REQUEST,
-    };
+  return {
+    type: DELETE_POST_REQUEST,
   };
-  
-  export const deletePostSuccess = (id) => {
-    return {
-      type: DELETE_POST_SUCCESS,
-      payload: id,
-    };
+};
+
+export const deletePostSuccess = (id) => {
+  return {
+    type: DELETE_POST_SUCCESS,
+    payload: id,
   };
-  
-  export const deletePostFailure = (error) => {
-    return {
-      type: DELETE_POST_FAILURE,
-      payload: error,
-      error: true,
-    };
+};
+
+export const deletePostFailure = (error) => {
+  return {
+    type: DELETE_POST_FAILURE,
+    payload: error,
+    error: true,
   };
-  
-  export const deletePostAction = (id, token, history) => {
-    return async function (dispatch, getState) {
-      dispatch(deletePostRequest());
-      try {
-        await deletePost(id, token);
-        dispatch(deletePostSuccess(id));
-        toast.warning(`It's gone 👋`);
-      } catch (error) {
-        dispatch(deletePostFailure(error));
-      }
-    };
+};
+
+export const deletePostAction = (id, token, history) => {
+  return async function (dispatch, getState) {
+    dispatch(deletePostRequest());
+    try {
+      await deletePost(id, token);
+      dispatch(deletePostSuccess(id));
+      toast.warning(`It's gone 👋`);
+    } catch (error) {
+      dispatch(deletePostFailure(error));
+    }
   };
+};

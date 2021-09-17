@@ -14,7 +14,7 @@ WORKDIR /my-project
 ENV NODE_ENV production
 
 COPY --from=builder /my-project/tailwind.config.js ./
-COPY --from=builder /my-project/tsconfig.js ./
+COPY --from=builder /my-project/tsconfig.json ./
 COPY --from=builder /my-project/next-env.d.ts ./
 COPY --from=builder /my-project/next.config.js ./
 COPY --from=builder /my-project/.env ./
