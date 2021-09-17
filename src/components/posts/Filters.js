@@ -42,10 +42,10 @@ export default function Filters({ filters, setFilters }) {
           value={filters.ordering}
           onChange={handleChange}
         >
+          <option value="desc">Desc</option>
           <option value="asc">
             Asc
           </option>
-          <option value="desc">Desc</option>
         </select>
         <div className="absolute inset-y-0 right-3 flex items-center px-2 pointer-events-none">
           {/* <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">

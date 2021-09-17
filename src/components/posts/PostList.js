@@ -17,7 +17,7 @@ export default function PostList({ posts }) {
     const [modalParams, setModalParams] = React.useState({show: false, id: null, token: null});
     const [filters, setFilters] = useState({
         filter: 'date',
-        ordering: 'asc'
+        ordering: 'desc'
     });
     const dispatch = useDispatch();
     const history = useRouter();
