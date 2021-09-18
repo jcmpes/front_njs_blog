@@ -16,18 +16,18 @@ export const register = (userData) => {
 
 // Login
 export const login = (credentials) => {
-    // Basic Auth
-    const { email, password } = credentials
-    const basic_token = token(email, password)
+    // Generate HTTP Basic Auth
+    // const { email, password } = credentials
+    // const basic_token = token(email, password)
 
   return client
     .post('users/login/', credentials)
     .then(({ user, access_token }) => {
         // Uncommento for Token auth
-        // configureClient(access_token);
+        configureClient(access_token);
 
         // Comment line below for Token Auth
-        configureClient(access_token, basic_token)
+        // configureClient(access_token, basic_token)
       if (credentials.remember) {
         storage.set('auth', access_token);
         storage.set('email', user.email);

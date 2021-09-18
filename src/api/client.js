@@ -3,17 +3,17 @@ import axios from 'axios';
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_BASE_URL });
 
 const setAuthorizationHeader = (token) => {
-    // client.defaults.headers.common['Authorization'] = `Token ${token}`;
-    // Add a request interceptor
-    client.interceptors.request.use(function (config) {
-        // Uncomment for Token auth
-        // config.headers.Authorization = `Token ${token}`;
+  // client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  // Add a request interceptor
+  client.interceptors.request.use(function (config) {
+    // Uncomment for Token auth
+    // config.headers.Authorization = `Token ${token}`;
 
-        // Comment line below for Token Auth
-        config.headers.Authorization = `Basic ${token}`;
+    // Comment line below for Token Auth
+    config.headers.Authorization = `Basic ${token}`;
 
-        return config;
-    });
+    return config;
+  });
 };
 
 const removeAuthorizationHeader = () => {
@@ -35,18 +35,16 @@ client.interceptors.response.use(
   },
 );
 
-
-
 export const configureClient = (access_token, basic_token) => {
-// Uncomment for Token auth
-    //   if (access_token) {
-//     setAuthorizationHeader(access_token);
-//   }
-
-// Comment if clause below for Token Auth
-  if (basic_token) {
-      setAuthorizationHeader(basic_token);
+  //   Uncomment for Token auth
+  if (access_token) {
+    setAuthorizationHeader(access_token);
   }
+
+  // Comment if clause below for Token Auth
+  //   if (basic_token) {
+  //     setAuthorizationHeader(basic_token);
+  //   }
 };
 
 export const resetClient = () => {
