@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider, useDispatch } from 'react-redux';
-import { configureClient } from '../src/api/client';
+import { configureClient, resetClient } from '../src/api/client';
 import configureStore from '../src/store';
 import storage from '../src/utils/storage';
 import { toast, ToastContainer } from 'react-toastify';
@@ -11,12 +11,10 @@ import '../styles/globals.css';
 
 const access_token = storage.get('auth');
 
-
 if (access_token) {
-  configureClient({ access_token });
-    // restoreToken(access_token)
+  configureClient(access_token);
+//   restoreToken(access_token)
 }
-
 
 const initialState = {
   auth: {
@@ -32,13 +30,12 @@ const initialState = {
 
 const store = configureStore(initialState);
 function MyApp({ Component, pageProps }) {
-    return (
-        <Provider store={store}>
-            <Component {...pageProps} />;
-            <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
-        </Provider>
-
-    )
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />;
+      <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
+    </Provider>
+  );
 }
 
 export default MyApp;

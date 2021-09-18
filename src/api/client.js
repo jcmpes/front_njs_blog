@@ -7,10 +7,10 @@ const setAuthorizationHeader = (token) => {
   // Add a request interceptor
   client.interceptors.request.use(function (config) {
     // Uncomment for Token auth
-    // config.headers.Authorization = `Token ${token}`;
+    config.headers.Authorization = `Token ${token}`;
 
     // Comment line below for Token Auth
-    config.headers.Authorization = `Basic ${token}`;
+    // config.headers.Authorization = `Basic ${token}`;
 
     return config;
   });
