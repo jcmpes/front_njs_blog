@@ -8,7 +8,6 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import Button from "@material-tailwind/react/Button";
-import { deletePost } from "../../api/posts";
 import { deletePostAction } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
